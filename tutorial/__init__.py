@@ -19,9 +19,9 @@ def main(global_config, **settings):
 
     config.add_route('login', '/')
     config.add_route('callback', '/login/oauth2/code')
-    config.add_route('resource_1', '/resource_1')
-    config.add_route('resource_2', '/resource_2')
-    config.add_route('mashup', '/mashup.html')
+    config.add_route('resource1', '/resource_1')
+    config.add_route('resource2', '/resource_2')
+    config.add_route('mashup', '/mashup')
 
     config.scan('.views')
     return config.make_wsgi_app()

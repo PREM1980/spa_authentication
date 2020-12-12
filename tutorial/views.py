@@ -33,15 +33,13 @@ def login(request):
 
     redirect_to = redirect_path(request)
 
-    response = Response(json.dumps({'note': 'testing'}))
+    response = Response(json.dumps({'note': 'testing1'}))
     return response
 
 
 @view_config(route_name='callback')
 def callback(request):
-
-    log.debug('********* callback **********')
-    print_requests(request)
+    print('callback')
 
     code = request.params.get('code')
 
@@ -59,23 +57,23 @@ def callback(request):
     return response
 
 
-@view_config(route_name='resource_1', permission='edit')
-# @view_config(route_name='resource_1')
-def resource_1(request):
-    print('u - ',unauthenticated_userid(request))
+@view_config(route_name='resource1', permission='edit')
+# @view_config(route_name='resource1')
+def resource1(request):
     print('a -', authenticated_userid(request))
+    print('u - ',unauthenticated_userid(request))
     r = {'test': 'resource_1'}
     return Response(json.dumps(r))
 
 
-@forbidden_view_config()
-def resource_2(request):
-    return Response('You are not allowed', status='403 Forbidden')
+# @forbidden_view_config()
+@view_config(route_name='resource2')
+def resource2(request):
+    return Response('Hello resource2')
 
 @view_config(route_name='mashup')
 def mashup(request):
     print('mashup')
-
     r = {'Note': 'Undergoing test'}
 
     return Response(json.dumps(r))
